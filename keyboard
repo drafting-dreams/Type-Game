@@ -1,0 +1,130 @@
+#include <graphics.h>
+#include <conio.h>
+
+
+void keyb()
+{
+
+
+
+	setlinestyle(PS_SOLID, 1);
+	setlinecolor(GREEN);
+	settextcolor(GREEN);
+	setfillcolor(RGB(55, 34, 69));
+	roundrect(90, 345, 695, 530, 10, 10);//键盘框
+	fillroundrect(90, 345, 695, 530, 10, 10);
+	//第一行
+	for (int i = 0; i < 12; i++) {
+		setfillcolor(RGB(55, i * 10, i * 10));
+		roundrect(120 + i * 45, 350, 160 + i * 45, 390, 10, 10);
+		fillroundrect(120 + i * 45, 350, 160 + i * 45, 390, 10, 10);
+	}
+	//第二行
+	for (int i = 0; i < 11; i++) {
+		setfillcolor(RGB(55, i * 10, i * 10));
+		roundrect(135 + i * 45, 395, 175 + i * 45, 435, 10, 10);
+		fillroundrect(135 + i * 45, 395, 175 + i * 45, 435, 10, 10);
+	}
+	//第三行
+	for (int i = 0; i < 9; i++) {
+		setfillcolor(RGB(55, i * 10, i * 10));
+		roundrect(150 + i * 45, 440, 190 + i * 45, 480, 10, 10);
+		fillroundrect(150 + i * 45, 440, 190 + i * 45, 480, 10, 10);
+	}
+	line(0, 330, 1000, 330);
+	setfillcolor(RGB(55, 44, 48));
+	roundrect(95, 440, 145, 480, 10, 10);//left shift
+	fillroundrect(95, 440, 145, 480, 10, 10);
+	outtextxy(96, 441, "Shift");
+	setfillcolor(RGB(55, 39, 43));
+	roundrect(630, 395, 690, 435, 10, 10);//Enter
+	fillroundrect(630, 395, 690, 435, 10, 10);
+	setfillcolor(RGB(55, 68, 48));
+	roundrect(560, 440, 680, 480, 10, 10);//right shift
+	fillroundrect(560, 440, 680, 480, 10, 10);
+	outtextxy(561, 441, "Shift");
+	setfillcolor(RGB(55, 51, 52));
+	roundrect(285, 485, 515, 525, 10, 10);//空格
+	fillroundrect(285, 485, 515, 525, 10, 10);
+	settextstyle(20, 0, "Arial");
+
+	outtextxy(121, 351, 'Q');
+	outtextxy(166, 351, 'W');
+	outtextxy(211, 351, 'E');
+	outtextxy(256, 351, 'R');
+	outtextxy(301, 351, 'T');
+	outtextxy(346, 351, 'Y');
+	outtextxy(391, 351, 'U');
+	outtextxy(436, 351, 'I');
+	outtextxy(481, 351, 'O');
+	outtextxy(526, 351, 'P');
+	outtextxy(571, 351, "[ {");
+	outtextxy(616, 351, "] }");
+	outtextxy(136, 396, 'A');
+	outtextxy(181, 396, 'S');
+	outtextxy(226, 396, 'D');
+	outtextxy(271, 396, 'F');
+	outtextxy(316, 396, 'G');
+	outtextxy(361, 396, 'H');
+	outtextxy(406, 396, 'J');
+	outtextxy(451, 396, 'K');
+	outtextxy(496, 396, 'L');
+	outtextxy(541, 396, "; :");
+	outtextxy(586, 396, "\' \"");
+	outtextxy(631, 396, "Enter");
+	outtextxy(151, 441, 'Z');
+	outtextxy(196, 441, 'X');
+	outtextxy(241, 441, 'C');
+	outtextxy(286, 441, 'V');
+	outtextxy(331, 441, 'B');
+	outtextxy(376, 441, 'N');
+	outtextxy(421, 441, 'M');
+	outtextxy(466, 441, ", <");
+	outtextxy(511, 441, ". >");
+
+
+
+	// 关闭绘图窗口
+}
+
+//键盘的互动
+void hitk(char k) {
+	IMAGE temp;
+	switch (k) {
+	case 'q':getimage(&temp, 120, 350, 40, 40); fillroundrect(120, 350, 160, 390, 10, 10); Sleep(100); putimage(120, 350, &temp); break;
+	case 'w':getimage(&temp, 165, 350, 40, 40); fillroundrect(165, 350, 205, 390, 10, 10); Sleep(100); putimage(165, 350, &temp); break;
+	case 'e':getimage(&temp, 210, 350, 40, 40); fillroundrect(210, 350, 250, 390, 10, 10); Sleep(100); putimage(210, 350, &temp); break;
+	case 'r':getimage(&temp, 255, 350, 40, 40); fillroundrect(255, 350, 295, 390, 10, 10); Sleep(100); putimage(255, 350, &temp); break;
+	case 't':getimage(&temp, 300, 350, 40, 40); fillroundrect(300, 350, 340, 390, 10, 10); Sleep(100); putimage(300, 350, &temp); break;
+	case 'y':getimage(&temp, 345, 350, 40, 40); fillroundrect(345, 350, 385, 390, 10, 10); Sleep(100); putimage(345, 350, &temp); break;
+	case 'u':getimage(&temp, 390, 350, 40, 40); fillroundrect(390, 350, 430, 390, 10, 10); Sleep(100); putimage(390, 350, &temp); break;
+	case 'i':getimage(&temp, 435, 350, 40, 40); fillroundrect(435, 350, 475, 390, 10, 10); Sleep(100); putimage(435, 350, &temp); break;
+	case 'o':getimage(&temp, 480, 350, 40, 40); fillroundrect(480, 350, 520, 390, 10, 10); Sleep(100); putimage(480, 350, &temp); break;
+	case 'p':getimage(&temp, 525, 350, 40, 40); fillroundrect(525, 350, 565, 390, 10, 10); Sleep(100); putimage(525, 350, &temp); break;
+	case '[':getimage(&temp, 570, 350, 40, 40); fillroundrect(570, 350, 610, 390, 10, 10); Sleep(100); putimage(570, 350, &temp); break;
+	case ']':getimage(&temp, 615, 350, 40, 40); fillroundrect(615, 350, 655, 390, 10, 10); Sleep(100); putimage(615, 350, &temp); break;
+	case 'a':getimage(&temp, 135, 395, 40, 40); fillroundrect(135, 395, 175, 435, 10, 10); Sleep(100); putimage(135, 395, &temp); break;
+	case 's':getimage(&temp, 180, 395, 40, 40); fillroundrect(180, 395, 220, 435, 10, 10); Sleep(100); putimage(180, 395, &temp); break;
+	case 'd':getimage(&temp, 225, 395, 40, 40); fillroundrect(225, 395, 265, 435, 10, 10); Sleep(100); putimage(225, 395, &temp); break;
+	case 'f':getimage(&temp, 270, 395, 40, 40); fillroundrect(270, 395, 310, 435, 10, 10); Sleep(100); putimage(270, 395, &temp); break;
+	case 'g':getimage(&temp, 315, 395, 40, 40); fillroundrect(315, 395, 355, 435, 10, 10); Sleep(100); putimage(315, 395, &temp); break;
+	case 'h':getimage(&temp, 360, 395, 40, 40); fillroundrect(360, 395, 400, 435, 10, 10); Sleep(100); putimage(360, 395, &temp); break;
+	case 'j':getimage(&temp, 405, 395, 40, 40); fillroundrect(405, 395, 445, 435, 10, 10); Sleep(100); putimage(405, 395, &temp); break;
+	case 'k':getimage(&temp, 450, 395, 40, 40); fillroundrect(450, 395, 490, 435, 10, 10); Sleep(100); putimage(450, 395, &temp); break;
+	case 'l':getimage(&temp, 495, 395, 40, 40); fillroundrect(495, 395, 535, 435, 10, 10); Sleep(100); putimage(495, 395, &temp); break;
+	case ';':getimage(&temp, 540, 395, 40, 40); fillroundrect(540, 395, 570, 435, 10, 10); Sleep(100); putimage(540, 395, &temp); break;
+	case '\'':getimage(&temp, 585, 395, 40, 40); fillroundrect(585, 395, 625, 435, 10, 10); Sleep(100); putimage(585, 395, &temp); break;
+	case 'z':getimage(&temp, 150, 440, 40, 40); fillroundrect(150, 440, 190, 480, 10, 10); Sleep(100); putimage(150, 440, &temp); break;
+	case 'x':getimage(&temp, 195, 440, 40, 40); fillroundrect(195, 440, 235, 480, 10, 10); Sleep(100); putimage(195, 440, &temp); break;
+	case 'c':getimage(&temp, 240, 440, 40, 40); fillroundrect(240, 440, 280, 480, 10, 10); Sleep(100); putimage(240, 440, &temp); break;
+	case 'v':getimage(&temp, 285, 440, 40, 40); fillroundrect(285, 440, 325, 480, 10, 10); Sleep(100); putimage(285, 440, &temp); break;
+	case 'b':getimage(&temp, 330, 440, 40, 40); fillroundrect(330, 440, 370, 480, 10, 10); Sleep(100); putimage(330, 440, &temp); break;
+	case 'n':getimage(&temp, 375, 440, 40, 40); fillroundrect(375, 440, 415, 480, 10, 10); Sleep(100); putimage(375, 440, &temp); break;
+	case 'm':getimage(&temp, 420, 440, 40, 40); fillroundrect(420, 440, 460, 480, 10, 10); Sleep(100); putimage(420, 440, &temp); break;
+	case ',':getimage(&temp, 465, 440, 40, 40); fillroundrect(465, 440, 505, 480, 10, 10); Sleep(100); putimage(465, 440, &temp); break;
+	case '.':getimage(&temp, 510, 440, 40, 40); fillroundrect(510, 440, 550, 480, 10, 10); Sleep(100); putimage(510, 440, &temp); break;
+	case ' ':getimage(&temp, 285, 485, 240, 40); fillroundrect(285, 485, 515, 525, 10, 10); Sleep(100); putimage(285, 485, &temp); break;
+
+
+	}
+}
