@@ -1,0 +1,208 @@
+////////////////////////////////////////////
+// 程序名称：程序员大战僵尸
+// 编译环境：Visual Studio2015 Community，EasyX 2015beta
+// 程序编写：drafting_dreams
+// 最后更新：2010-8-26
+//
+#define _CRT_SECURE_NO_WARNINGS
+#include <graphics.h>
+#include <Windows.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+#include "key.h"
+#pragma comment(lib, "WINMM.LIB")
+
+// 欢迎界面
+void welcome()
+{
+	// 输出屏幕提示
+	cleardevice();     //清除题目和图形缓存区
+	IMAGE img;
+	loadimage(&img, "2014626111639320320.jpg");
+	putimage(0, 0, &img);
+	setbkmode(TRANSPARENT);
+	setcolor(YELLOW);
+	settextstyle(64, 0, "黑体");
+	outtextxy(300, 50, "程序员大战僵尸");
+	setcolor(WHITE);
+	settextstyle(16, 0, "宋体");
+	LOGFONT f;
+	gettextstyle(&f);
+	f.lfWeight = FW_BLACK;
+	settextstyle(&f);
+	outtextxy(330, 200, "你家外面的植物已经无法抵挡僵尸的进攻了");
+	outtextxy(330, 240, "僵尸打败了你们家的豌豆射手以及向日葵");
+	outtextxy(330, 280, "他们冲进了你的家准备吃掉你那看上去很可口的键盘");
+	outtextxy(330, 320, "拿起你的键盘奋起反抗吧！！！");
+	PlaySound(TEXT("AZA微唱团 - 植物大战僵尸 (Plants VS Zombies Remix).wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+	// 实现闪烁的“按任意键继续”
+
+	int c = 255;
+	while (!_kbhit())
+	{
+		setcolor(RGB(c, 0, 0));
+		outtextxy(350, 450, "按任意键继续");
+		c -= 8;
+		if (c < 0) c = 255;
+		Sleep(20);
+	}
+	_getch();
+	cleardevice();
+}
+
+// 退出界面
+void goodbye()
+{
+	cleardevice();
+	setcolor(YELLOW);
+	settextstyle(20, 0, "黑体");
+	setfillcolor(BLUE);
+	roundrect(348, 178, 640, 205, 10, 10);
+	roundrect(398, 338, 590, 365, 10, 10);
+	fillroundrect(348, 178, 640, 205, 10, 10);
+	fillroundrect(398, 338, 590, 365, 10, 10);
+	outtextxy(350, 180, "我又买了新的键盘，再来一次!");
+	outtextxy(400, 340, "僵尸好可怕，快跑！");
+
+}
+
+//失败界面
+void gameover() {
+	int x, y, flag = 1;
+	IMAGE img;
+	loadimage(&img, "162211118703.jpg");
+	for (x = 0; x <= 950; x += 50) {
+		if (flag) y = 0;
+		else y = 550;
+		while (y >= 0 && y <= 550) {
+			putimage(x, y, &img);
+			if (flag) y++;
+			else y--;
+			if (y == 551 || y == -1) flag = !flag;
+			Sleep(1);
+		}
+	}
+	settextcolor(RED);
+	settextstyle(100, 0, "华文彩云");
+	outtextxy(50, 250, "僵尸啃掉了你的键盘！");
+	Sleep(2000);
+}
+
+// 主函数
+
+void main()
+{
+	initgraph(1000, 600);		// 初始化屏幕为 640x480
+
+	welcome();					// 显示欢迎界面
+START:
+	IMAGE img1;
+	loadimage(&img1, "39992842_1413967558980_medium.jpg");              //背景
+	putimage(0, 0, &img1);
+	keyb();
+	PlaySound(TEXT("Laura Shigihara - Graze the Roof.wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+	srand(time(NULL));			// 设置随机种子
+	settextstyle(16, 0, "Arial");	// 设置字母的字体和大小
+									// 设置清除字母的填充区域颜色
+
+	char target;				// 目标字母
+	char key;					// 用户的按键
+	int x, y;					// 字母的位置
+	int speed = 10;
+	IMAGE img, temp1, temp2, pic;
+	loadimage(&img, "162211118703.jpg");     //僵尸头部图案
+	putimage(800, 400, &img);
+	getimage(&pic, 850, 400, 50, 50);
+	outtextxy(851, 401, "X0");
+	int i = 0;     //记录分数
+	char ch[4];
+	// 主循环
+	while (true)
+	{
+		target = 65 + rand() % 26;		// 产生任意大写字母
+		x = rand() % 934;				// 产生任意下落位置
+		for (y = 0; y<280; y++)
+		{
+
+			setcolor(GREEN);			// 设置字母的颜色
+			setbkmode(TRANSPARENT);
+			getimage(&temp1, x, y, 16, 16);
+			getimage(&temp2, x + 16, y, 50, 50);
+			outtextxy(x, y, target);	// 显示字母
+			putimage(x + 16, y, &img);
+
+
+			if (_kbhit())
+			{
+				key = _getch();			// 获取用户按键
+				hitk(key);
+				if ((key == target) || (key == target + 32))
+				{
+					// 按键正确，“击落”字母（画黑色方块擦除）
+					i++;
+					_itoa(i, ch, 10);
+					putimage(850, 400, &pic);
+					outtextxy(851, 401, 'X');
+					outtextxy(859, 401, ch);
+					//累计分数
+					putimage(x, y, &temp1);
+					putimage(x + 16, y, &temp2);
+					//刷新图案
+					break;				// 跳出循环，进行下一个字母
+				}
+				else if (key == 27)
+				{
+					goto EXIT;			// 如果按 ESC，退出游戏主循环
+				}
+				else speed--;
+			}
+
+			// 延时，并清除字母
+			Sleep(speed);
+			setfillcolor(BLACK);
+			putimage(x, y, &temp1);
+			putimage(x + 16, y, &temp2);
+			if (y >= 279) goto GAMEOVER;
+		}
+	}
+GAMEOVER:
+
+	gameover();
+
+EXIT:
+	// 退出部分
+	goodbye();
+	MOUSEMSG m;
+	while (true) {
+		if (MouseHit()) {
+			m = GetMouseMsg();
+			if (m.x > 348 && m.x < 640 && m.y>178 && m.y < 205) {
+				if (m.mkLButton) {
+					IMAGE img;
+					setfillcolor(RGB(96, 96, 96));
+					getimage(&img, 348, 178, 300, 30);
+					fillroundrect(348, 178, 640, 205, 10, 10);
+					Sleep(100);
+					putimage(348, 178, &img);
+					goto START;
+				}
+			}
+			if (m.x > 398 && m.x < 590 && m.y>338 && m.y < 365) {
+				if (m.mkLButton) {
+					IMAGE img;
+					setfillcolor(RGB(96, 96, 96));
+					getimage(&img, 398, 338, 200, 30);
+					fillroundrect(398, 338, 590, 365, 10, 10);
+					Sleep(100);
+					putimage(398, 338, &img);
+					break;
+				}
+			}
+		}
+
+	}
+
+	// 关闭图形界面
+	closegraph();
+}
